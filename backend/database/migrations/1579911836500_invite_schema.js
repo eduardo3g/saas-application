@@ -1,33 +1,31 @@
-
-/** @type {import('@adonisjs/lucid/src/Schema')} */
-const Schema = use('Schema');
+const Schema = use('Schema')
 
 class InviteSchema extends Schema {
-  up() {
+  up () {
     this.create('invites', (table) => {
-      table.increments();
+      table.increments()
       table.integer('user_id')
         .unsigned()
         .notNullable()
         .references('id')
         .inTable('users')
         .onUpdate('CASCADE')
-        .onDelete('CASCADE');
+        .onDelete('CASCADE')
       table.integer('team_id')
         .unsigned()
         .notNullable()
         .references('id')
         .inTable('teams')
         .onUpdate('CASCADE')
-        .onDelete('CASCADE');
-      table.string('email').notNullable();
-      table.timestamps();
-    });
+        .onDelete('CASCADE')
+      table.string('email').notNullable()
+      table.timestamps()
+    })
   }
 
-  down() {
-    this.drop('invites');
+  down () {
+    this.drop('invites')
   }
 }
 
-module.exports = InviteSchema;
+module.exports = InviteSchema

@@ -1,10 +1,11 @@
 {
     "env": {
+        "commonjs": true,
         "es6": true,
         "node": true
     },
     "extends": [
-        "airbnb-base"
+        "standard"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -12,10 +13,8 @@
         "use": true
     },
     "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
+        "ecmaVersion": 2018
     },
     "rules": {
-      "no-param-reassign": "off"
     }
 }
