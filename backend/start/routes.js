@@ -20,6 +20,7 @@ Route.get('/', () => {
 })
 
 Route.post('sessions', 'SessionController.store')
+Route.post('users', 'UserController.store')
 
 Route.group(() => {
   Route.resource('teams', 'TeamController').apiOnly()
