@@ -19,15 +19,37 @@ Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
 
-Route.post('sessions', 'SessionController.store')
-Route.post('users', 'UserController.store')
+Route.post('sessions', 'SessionController.store').validator('Session')
+Route.post('users', 'UserController.store').validator('User')
 
 Route.group(() => {
-  Route.resource('teams', 'TeamController').apiOnly()
+  Route.resource('teams', 'TeamController')
+    .apiOnly()
+    .validator(
+      new Map(
+        [
+          [
+            ['teams.store', 'teams.update'], // only applies 'Team' validator for these methods
+            ['Team']
+          ]
+        ]
+      )
+    )
 }).middleware('auth')
 
 Route.group(() => {
-  Route.post('invites', 'InviteController.store')
+  Route.post('invites', 'InviteController.store').validator('Invite')
 
-  Route.resource('projects', 'ProjectController').apiOnly()
+  Route.resource('projects', 'ProjectController')
+    .apiOnly()
+    .validator(
+      new Map(
+        [
+          [
+            ['projects.store', 'projects.update'], // only applies 'Project' validator for these methods
+            ['Project']
+          ]
+        ]
+      )
+    )
 }).middleware(['auth', 'team'])
